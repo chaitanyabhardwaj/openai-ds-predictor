@@ -1,6 +1,6 @@
 # openai-ds-predictor - OpenAI API
 
-This app recommends or the best or suitable data structure applicable for any given situation in the field of computer science. It uses the [OpenAI API](https://platform.openai.com). It uses the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/).
+This app recommends the best or most suitable data structure applicable for any given situation in the field of computer science. It uses the [OpenAI API](https://platform.openai.com). It uses the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/).
 
 <img width="433" alt="Screenshot 2023-03-26 at 11 26 52 PM" src="https://user-images.githubusercontent.com/17910338/227794992-c19cb93d-d33b-44c8-a049-5fedfa56a979.png">
 
@@ -20,16 +20,13 @@ This app recommends or the best or suitable data structure applicable for any gi
    $ npm install
    ```
 
-5. Make a copy of the example environment variables file
+5. Create a new environment variables file
 
    On Linux systems: 
    ```bash
-   $ cp .env.example .env
+   $ nano .env
    ```
-   On Windows:
-   ```powershell
-   $ copy .env.example .env
-   ```
+   
 6. Add your [API key](https://platform.openai.com/account/api-keys) to the newly created `.env` file
 
 7. Run the app
