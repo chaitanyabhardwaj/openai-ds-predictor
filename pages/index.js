@@ -7,10 +7,12 @@ export default function Home() {
   const [input, setInput] = useState("");
   const[creativityCheckValue, setCreativity] = useState(false);
   const [result, setResult] = useState();
+  const [impl, setImpl] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
     console.log(creativityCheckValue);
+    setImpl("");
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -20,7 +22,7 @@ export default function Home() {
         body: JSON.stringify({
           msg: input,
           temp: creativityCheckValue
-        }),
+        })
       });
 
       const data = await response.json();
@@ -37,6 +39,36 @@ export default function Home() {
     }
   }
 
+  async function implement() {
+    const results = result.split('/s+or/s+');
+    results.forEach(async e => {
+      try {
+        console.log(e);
+        const res = await fetch("/api/implement", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ds: e.trim()
+          })
+        });
+      const data = await res.json();
+      if (res.status !== 200) {
+        throw data.error || new Error(`Request failed with status ${res.status}`);
+      }
+      console.log(data);
+      const ans = data.result.replace(/(?:\r\n|\r|\n)/g,'<br>') + '<hr><br>';
+      setImpl(ans);
+      setInput("");
+      }catch(error) {
+        // Consider implementing your own error handling logic here
+        console.error(error);
+        alert(error.message);
+      }
+    });
+  }
+
   return (
     <div>
       <Head>
@@ -46,7 +78,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <Link href="https://chaitanyabhardwaj.github.io">
-          <img src="/favicon.png" className={styles.img} width="90px" height="auto" />
+          <img src="/favicon.png" className={styles.img} width="65px" height="auto" />
         </Link>
         <h3>Suggest a data structure for the following situations</h3>
         <form onSubmit={onSubmit}>
@@ -64,6 +96,8 @@ export default function Home() {
           </div>
         </form>
         <div className={styles.result}>{result}</div>
+        <button type="button" onClick={implement}>Implementation of {result}</button>
+        <div className={styles.impl} dangerouslySetInnerHTML={{__html: impl}}></div>
       </main>
     </div>
   );
