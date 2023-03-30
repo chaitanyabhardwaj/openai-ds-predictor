@@ -36,3 +36,11 @@ This app recommends the best or most suitable data structure applicable for any 
    ```
 
 You should now be able to access the app at [http://localhost:3000](http://localhost:3000)!
+
+<hr>
+
+### New feature - Implement
+
+Besides predicting the most suitable data structure(s), we now have the function to generate implementation of suggested data structures on a click!
+
+<img width="362" alt="Screenshot 2023-03-31 at 2 20 35 AM" src="https://user-images.githubusercontent.com/17910338/228961359-ce041781-aa49-4040-9d16-fbb3720a795c.png">
