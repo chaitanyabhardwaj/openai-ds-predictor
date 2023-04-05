@@ -39,8 +39,8 @@ You should now be able to access the app at [http://localhost:3000](http://local
 
 <hr>
 
-### New feature - Implement
+### Feature - Implement in your language of choice
 
-Besides predicting the most suitable data structure(s), we now have the function to generate implementation of suggested data structures on a click!
+Besides predicting the most suitable data structure(s), we now have the function to generate implementation of suggested data structures in your desired language on a click!
 
-<img width="362" alt="Screenshot 2023-03-31 at 2 20 35 AM" src="https://user-images.githubusercontent.com/17910338/228961359-ce041781-aa49-4040-9d16-fbb3720a795c.png">
+<img width="340" alt="Screenshot 2023-04-06 at 1 42 41 AM" src="https://user-images.githubusercontent.com/17910338/230199200-e84d0982-8029-4c99-a166-0c940eec12da.png">
