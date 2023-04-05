@@ -16,6 +16,7 @@ export default async function (req, res) {
   }
 
   const ds = req.body.ds || '';
+  const implLang = req.body.lang || '';
   if (ds.trim().length === 0) {
     res.status(400).json({
       error: {
@@ -28,7 +29,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(ds),
+      prompt: generatePrompt(ds, implLang==''?'C':implLang),
       temperature: 0,
       max_tokens: 2048
     });
@@ -51,7 +52,8 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(ds) {
-  const capitalized = ds[0].toUpperCase() + ds.slice(1).toLowerCase();
-  return `Here is a complete working example of the ${capitalized} data structure:`;
+function generatePrompt(ds, lang) {
+  const capitalizedDs = ds[0].toUpperCase() + ds.slice(1).toLowerCase();
+  const capitalizedLang = lang[0].toUpperCase() + lang.slice(1).toLowerCase();
+  return `Here is a complete working example of the ${capitalizedDs} data structure in ${capitalizedLang}:`;
 }

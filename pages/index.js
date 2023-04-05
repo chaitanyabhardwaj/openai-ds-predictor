@@ -8,10 +8,10 @@ export default function Home() {
   const[creativityCheckValue, setCreativity] = useState(false);
   const [result, setResult] = useState();
   const [impl, setImpl] = useState("");
+  const [implLang, setImplLang] = useState("C");
 
   async function onSubmit(event) {
     event.preventDefault();
-    console.log(creativityCheckValue);
     setImpl("");
     try {
       const response = await fetch("/api/generate", {
@@ -40,33 +40,36 @@ export default function Home() {
   }
 
   async function implement() {
-    const results = result.split('/s+or/s+');
-    results.forEach(async e => {
+    setImpl("");
+    const results = result.split(',');
+    let ans = '';
+    for(const e of results) {
       try {
-        console.log(e);
         const res = await fetch("/api/implement", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ds: e.trim()
+            ds: e.trim(),
+            lang: implLang
           })
         });
       const data = await res.json();
       if (res.status !== 200) {
         throw data.error || new Error(`Request failed with status ${res.status}`);
       }
-      console.log(data);
-      const ans = data.result.replace(/(?:\r\n|\r|\n)/g,'<br>') + '<hr><br>';
-      setImpl(ans);
-      setInput("");
+      ans += data.result.replace(/(?:\r\n|\r|\n)/g,'<br>') + '<hr><br>';
+      console.log(ans);
       }catch(error) {
         // Consider implementing your own error handling logic here
         console.error(error);
         alert(error.message);
       }
-    });
+    }
+    console.log('completed');
+    setImpl(ans);
+    setInput("");
   }
 
   return (
@@ -96,8 +99,19 @@ export default function Home() {
           </div>
         </form>
         <div className={styles.result}>{result}</div>
-        <button type="button" onClick={implement}>Implementation of {result}</button>
-        <div className={styles.impl} dangerouslySetInnerHTML={{__html: impl}}></div>
+        <div className={styles.row}>
+          <button type="button" onClick={implement}>Implementation -&gt; {result}</button>
+          <span style={{marginLeft:"10px"}}>in</span>
+          <input
+              type="text"
+              name="impl-lang"
+              placeholder="C"
+              value={implLang}
+              onChange={(e) => setImplLang(e.target.value)}
+              className={styles.implLang}
+            />
+        </div>
+        <div className={impl == ''?'':styles.impl} dangerouslySetInnerHTML={{__html: impl}}></div>
       </main>
     </div>
   );

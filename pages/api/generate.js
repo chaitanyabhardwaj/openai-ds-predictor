@@ -58,11 +58,11 @@ function generatePrompt(msg, temp) {
     if(temp) {
       return `Suggest 1 or more data structures with lowest time complexity and/or lowest space complexity, for the following situations: 
       Q: Searching all matching words in a large list
-      A: Trie or Hash table or Array
+      A: Trie, Hash table, Array
       Q: To find the shortest path available from one point to another.
       A: Graphs 
       Q: To find kth largest element in a list
-      A: Max heap or Priority queue
+      A: Max heap, Priority queue
       Q: ${capitalized}
       A: `;
     }
@@ -72,7 +72,7 @@ function generatePrompt(msg, temp) {
   Q: To find the shortest path available from one point to another.
   A: Graphs
   Q: To find kth largest element in a list
-  A: Max heap or Priority queue
+  A: Max heap, Priority queue
   Q: ${capitalized}
   A: `;
 }
