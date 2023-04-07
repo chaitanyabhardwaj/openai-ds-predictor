@@ -30,7 +30,7 @@ export default function Home() {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
 
-      setResult(data.result);
+      setResult("Suggestion: " + data.result);
       setInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
@@ -99,7 +99,7 @@ export default function Home() {
           </div>
         </form>
         <div className={styles.result}>{result}</div>
-        <div className={styles.row}>
+        <div className={styles.row} style={{marginTop: "20px"}}>
           <button type="button" onClick={implement}>Implementation -&gt; {result}</button>
           <span style={{marginLeft:"10px"}}>in</span>
           <input
